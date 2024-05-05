@@ -9,26 +9,38 @@
         android:id="@+id/nameEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Name" />
+        android:hint="@string/name" />
+
+    <EditText
+        android:id="@+id/modelEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/model" />
 
     <EditText
         android:id="@+id/quantityEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Quantity"
+        android:hint="@string/quantity"
         android:inputType="number" />
 
     <EditText
         android:id="@+id/qualityEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Quality" />
+        android:hint="@string/quality" />
 
     <EditText
         android:id="@+id/priceEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Price"
+        android:hint="@string/price_inr"
         android:inputType="numberDecimal" />
+
+    <EditText
+        android:id="@+id/categoryEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/category" />
 
 </LinearLayout>

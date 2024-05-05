@@ -1,24 +1,26 @@
 package com.ak.mymanagement.model;
 
-import android.net.Uri;
-
 public class Component {
     private String name;
+    private String model;
     private String quality;
     private String price;
     private String quantity;
     private String image;
     private String updatedBy;
+    private String category;
 
     public Component() {}
 
-    public Component(String name, String quality, String price, String quantity, String imageUrl, String updatedBy) {
+    public Component(String name, String model, String quality, String price, String quantity, String imageUrl, String updatedBy, String category) {
         this.name = name;
+        this.model = model;
         this.quality = quality;
         this.price = price;
         this.quantity = quantity;
         this.image = imageUrl;
         this.updatedBy = updatedBy;
+        this.category = category;
     }
 
     public String getName() {
@@ -67,5 +69,21 @@ public class Component {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
     }
 }

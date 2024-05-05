@@ -41,10 +41,6 @@ public class DashboardActivity extends AppCompatActivity {
     private ActionBarDrawerToggle actionBarDrawerToggle;
 
     private RecyclerView recyclerView;
-    private FirebaseAuth auth;
-    private FirebaseUser user;
-    private FirebaseDatabase db;
-    private DatabaseReference refComponent;
 
     @SuppressLint({"UseCompatLoadingForDrawables", "MissingInflatedId"})
     @Override
@@ -58,6 +54,9 @@ public class DashboardActivity extends AppCompatActivity {
         actionBarDrawerToggle.syncState();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Dashboard");
+
+        FirebaseAuth auth = FirebaseAuth.getInstance();
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -65,11 +64,7 @@ public class DashboardActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 int index = menuItem.getItemId();
 
-                if (index == R.id.nav_filter) {
-                    // filters selected
-                    showFilterPopupMenu(navigationView);
-                }
-                else if (index == R.id.nav_settings) {
+                if (index == R.id.nav_settings) {
                     // settings selected
                 }
                 else if (index == R.id.nav_about_us) {
@@ -115,10 +110,6 @@ public class DashboardActivity extends AppCompatActivity {
             }
         });
 
-        auth = FirebaseAuth.getInstance();
-        user = auth.getCurrentUser();
-        db = FirebaseDatabase.getInstance();
-        refComponent = db.getReference("Components");
     }
 
     @Override
@@ -133,28 +124,4 @@ public class DashboardActivity extends AppCompatActivity {
         startActivity(new Intent(this, AddComponentActivity.class));
     }
 
-    private void showFilterPopupMenu(View view) {
-        PopupMenu popupMenu = new PopupMenu(this, view);
-        MenuInflater inflater = popupMenu.getMenuInflater();
-        inflater.inflate(R.menu.filter_menu, popupMenu.getMenu());
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                // Handle filter option selection
-                int index = item.getItemId();
-
-                if (index==R.id.filter_option1) {
-                    // apply first filter
-                    applyFilter(1);
-                }
-                return true;
-            }
-        });
-        popupMenu.show();
-    }
-
-    private void applyFilter(int index) {
-        // Implement logic to apply the selected filter
-        Toast.makeText(this, "Filter applied: " + index, Toast.LENGTH_SHORT).show();
-    }
 }

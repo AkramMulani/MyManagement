@@ -57,6 +57,8 @@ public class ComponentAdapter extends RecyclerView.Adapter<ComponentAdapter.View
         private final TextView qualityTextView;
         private final TextView priceTextView;
         private final ImageView imageView;
+        private final TextView modelTextView;
+        private final TextView categoryTextView;
         private final Button increase;
         private final Button decrease;
         private final FloatingActionButton edit;
@@ -79,6 +81,9 @@ public class ComponentAdapter extends RecyclerView.Adapter<ComponentAdapter.View
             decrease = itemView.findViewById(R.id.action_decrease);
             edit = itemView.findViewById(R.id.action_edit_component);
 
+            modelTextView = itemView.findViewById(R.id.model);
+            categoryTextView = itemView.findViewById(R.id.category);
+
             increase.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -100,7 +105,7 @@ public class ComponentAdapter extends RecyclerView.Adapter<ComponentAdapter.View
                 public void onClick(View v) {
                     CustomDialog.showDialog(itemView.getContext(), new CustomDialog.DialogListener() {
                         @Override
-                        public void onDialogPositiveClick(String name, String quantity, String quality, String price) {
+                        public void onDialogPositiveClick(String name, String model, String quantity, String quality, String price, String category) {
                             String imageUrl = component.getImage();
 
                             // then add new version
@@ -112,15 +117,22 @@ public class ComponentAdapter extends RecyclerView.Adapter<ComponentAdapter.View
                                 refComp.child(name).child("quality").setValue(component.getQuality());
                                 refComp.child(name).child("price").setValue(component.getPrice());
                                 refComp.child(name).child("image").setValue(imageUrl);
+                                refComp.child(name).child("model").setValue(component.getModel());
+                                refComp.child(name).child("category").setValue(component.getCategory());
                             }
+                            if (!model.isEmpty())
+                                refComp.child(component.getName()).child("model").setValue(model);
                             if (!quantity.isEmpty())
                                 refComp.child(component.getName()).child("quantity").setValue(quantity);
                             if (!quality.isEmpty())
                                 refComp.child(component.getName()).child("quality").setValue(quality);
                             if (!price.isEmpty())
                                 refComp.child(component.getName()).child("price").setValue(price);
-                            if (!imageUrl.isEmpty())
-                                refComp.child(component.getName()).child("image").setValue(imageUrl);
+                            if (imageUrl!=null)
+                                if (!imageUrl.isEmpty())
+                                    refComp.child(component.getName()).child("image").setValue(imageUrl);
+                            if (!category.isEmpty())
+                                refComp.child(component.getName()).child("category").setValue(category);
                             refComp.child(component.getName()).child("updatedBy").setValue(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid());
                         }
                     });
@@ -135,6 +147,8 @@ public class ComponentAdapter extends RecyclerView.Adapter<ComponentAdapter.View
             quantityTextView.setText(component.getQuantity());
             qualityTextView.setText(component.getQuality());
             priceTextView.setText(component.getPrice());
+            modelTextView.setText(component.getModel());
+            categoryTextView.setText(component.getCategory());
             // Load image using Glide
             Glide.with(itemView.getContext())
                     .load(component.getImage())

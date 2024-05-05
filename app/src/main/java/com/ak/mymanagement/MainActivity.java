@@ -22,11 +22,14 @@ public class MainActivity extends AppCompatActivity {
         if (auth.getCurrentUser()!=null) {
             // User already logged in... goto dashboard
             startActivity(new Intent(this, DashboardActivity.class));
+            if (auth.getCurrentUser()!=null) {
+                finish();
+            }
         }
         else {
             // Ask for login first
             startActivity(new Intent(this, LoginActivity.class));
+            finish();
         }
-        finish();
     }
 }

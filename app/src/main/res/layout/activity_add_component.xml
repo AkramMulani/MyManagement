@@ -32,8 +32,55 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/add_new_component1"
-        app:layout_constraintVertical_bias="0.1"
+        app:layout_constraintVertical_bias="0.05"
         android:padding="10sp"/>
+
+    <EditText
+        android:id="@+id/comp_model"
+        android:layout_width="match_parent"
+        android:layout_height="50sp"
+        android:hint="@string/model"
+        android:inputType="text"
+        android:background="@drawable/border_edittext"
+        android:autofillHints="name"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/comp_name"
+        app:layout_constraintVertical_bias="0.05"
+        android:padding="10sp"/>
+
+    <EditText
+        android:id="@+id/comp_quantity"
+        android:layout_width="match_parent"
+        android:layout_height="50sp"
+        android:hint="@string/quantity"
+        android:background="@drawable/border_edittext"
+        android:padding="10sp"
+        android:inputType="number"
+        android:autofillHints=""
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/comp_model"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.05"
+        />
+
+    <EditText
+        android:id="@+id/comp_price"
+        android:layout_width="match_parent"
+        android:layout_height="50sp"
+        android:hint="@string/price_inr"
+        android:background="@drawable/border_edittext"
+        android:padding="10sp"
+        android:inputType="number"
+        android:autofillHints=""
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/comp_quantity"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.05"
+        />
 
     <TextView
         android:id="@+id/textview1"
@@ -63,33 +110,17 @@
         android:padding="10sp"/>
 
     <EditText
-        android:id="@+id/comp_quantity"
+        android:id="@+id/comp_category"
         android:layout_width="match_parent"
         android:layout_height="50sp"
-        android:hint="@string/quantity"
+        android:hint="@string/category"
         android:background="@drawable/border_edittext"
         android:padding="10sp"
-        android:inputType="number"
-        android:autofillHints=""
+        android:inputType="text"
+        android:autofillHints="name"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/comp_name"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintVertical_bias="0.05"
-        />
-
-    <EditText
-        android:id="@+id/comp_price"
-        android:layout_width="match_parent"
-        android:layout_height="50sp"
-        android:hint="@string/price_inr"
-        android:background="@drawable/border_edittext"
-        android:padding="10sp"
-        android:inputType="number"
-        android:autofillHints=""
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/comp_quantity"
+        app:layout_constraintTop_toBottomOf="@id/qualitySpinner"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintVertical_bias="0.05"
         />
@@ -102,7 +133,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/qualitySpinner"
+        app:layout_constraintTop_toBottomOf="@id/comp_category"
         app:layout_constraintVertical_bias="0.2"
         app:layout_constraintHorizontal_bias="0.2"
         android:onClick="selectImage" />
@@ -114,7 +145,7 @@
         android:src="@drawable/common_google_signin_btn_icon_dark"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/qualitySpinner"
+        app:layout_constraintTop_toBottomOf="@id/comp_category"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintVertical_bias="0.1"
@@ -129,7 +160,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/qualitySpinner"
+        app:layout_constraintTop_toBottomOf="@id/comp_category"
         app:layout_constraintVertical_bias="1"
         android:onClick="saveAndContinue"/>
 

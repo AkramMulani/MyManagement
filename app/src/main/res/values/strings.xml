@@ -50,6 +50,9 @@
     <string name="filter_by_price_2000_5000">Filter by price 2000 - 5000</string>
     <string name="filter_by_price_5000_10000">Filter by price 5000 - 10000</string>
     <string name="filter_by_price_10000"><![CDATA[Filter by price > 10000]]></string>
+    <string name="model">Model</string>
+    <string name="dummy_category">dummy_category</string>
+    <string name="category">Category:</string>
 
     <string-array name="quality_options">
         <item>Good</item>

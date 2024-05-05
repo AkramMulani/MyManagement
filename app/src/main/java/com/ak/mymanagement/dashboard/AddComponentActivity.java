@@ -1,5 +1,6 @@
 package com.ak.mymanagement.dashboard;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,8 +22,11 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -129,10 +133,14 @@ public class AddComponentActivity extends AppCompatActivity implements AdapterVi
         EditText compName = findViewById(R.id.comp_name);
         EditText compQuantity = findViewById(R.id.comp_quantity);
         EditText compPrice = findViewById(R.id.comp_price);
+        EditText compModel = findViewById(R.id.comp_model);
+        EditText compCategory = findViewById(R.id.comp_category);
 
         String name = compName.getText().toString();
         String quantity = compQuantity.getText().toString();
         String price = compPrice.getText().toString();
+        String model = compModel.getText().toString();
+        String category = compCategory.getText().toString();
 
         // If image is selected then upload it to storage
         if (imageUri!=null)
@@ -143,6 +151,27 @@ public class AddComponentActivity extends AppCompatActivity implements AdapterVi
         refComp.child(name).child("price").setValue(price);
         refComp.child(name).child("quality").setValue(selectedQuality);
         refComp.child(name).child("updatedBy").setValue(user.getUid());
+        refComp.child(name).child("model").setValue(model);
+        refComp.child(name).child("category").setValue(category);
+
+        // Check if the category already exists in the database
+
+        db.getReference("Categories").orderByValue().equalTo(category)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (!dataSnapshot.exists()) {
+                    // Category does not exist, add it to the database
+                    db.getReference("Categories").push().setValue(category);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle database error
+
+            }
+        });
 
         finish();
     }
