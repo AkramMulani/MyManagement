@@ -1,0 +1,60 @@
+<resources>
+    <string name="app_name">MyManagement</string>
+    <string name="welcome">Welcome</string>
+    <string name="title_activity_loading">LoadingActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_activity_fullscreen">FullscreenActivity</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="login_to_continue">Login To Continue</string>
+    <string name="todo">TODO</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="show_password">show password</string>
+    <string name="register_user">Register User</string>
+    <string name="mobile_no">Mobile No.</string>
+    <string name="e_mail_id">E-mail ID</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="add_new_component">Add New Component</string>
+    <string name="component">Component</string>
+    <string name="quantity">Quantity:</string>
+    <string name="dummy_value_10">10</string>
+    <string name="quality">Quality:</string>
+    <string name="good">Good</string>
+    <string name="price_inr">Price (INR):</string>
+    <string name="_1999">1999/-</string>
+    <string name="increase">+</string>
+    <string name="decrease">-</string>
+    <string name="increase_decrease_quantity">increase/decrease quantity</string>
+    <string name="edit_component_info">Edit Component Info</string>
+    <string name="name">Name</string>
+    <string name="select_image">Select Image</string>
+    <string name="save_and_continue">Save and Continue</string>
+    <string name="navigation_drawer_open">Navigation</string>
+    <string name="navigation_drawer_close">Dashboard</string>
+    <string name="filter_by_quality_good">Filter by quality good</string>
+    <string name="filter_by_quality_average">Filter by quality average</string>
+    <string name="filter_by_quality_poor">Filter by quality poor</string>
+    <string name="filter_by_quantity_10"><![CDATA[Filter by quantity < 10]]></string>
+    <string name="filter_by_quantity_10_60">Filter by quantity 10 - 60</string>
+    <string name="filter_by_quantity_60"><![CDATA[Filter by quantity > 60]]></string>
+    <string name="filter_by_price_500"><![CDATA[Filter by price < 500]]></string>
+    <string name="filter_by_price_500_2000">Filter by price 500 - 2000</string>
+    <string name="filter_by_price_2000_5000">Filter by price 2000 - 5000</string>
+    <string name="filter_by_price_5000_10000">Filter by price 5000 - 10000</string>
+    <string name="filter_by_price_10000"><![CDATA[Filter by price > 10000]]></string>
+
+    <string-array name="quality_options">
+        <item>Good</item>
+        <item>Average</item>
+        <item>Poor</item>
+        <!-- Add more quality options as needed -->
+    </string-array>
+</resources>

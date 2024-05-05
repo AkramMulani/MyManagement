@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "349478583433",
+    "project_id": "mymanagement-77e64",
+    "storage_bucket": "mymanagement-77e64.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:349478583433:android:cd7316ef7ad62b96e05a58",
+        "android_client_info": {
+          "package_name": "com.ak.mymanagement"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMQYXCOtyoDa7_cs0rIqQKYXatVyGzEko"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/filter_option1"
+        android:title="@string/filter_by_quality_good" />
+    <item
+        android:id="@+id/filter_option2"
+        android:title="@string/filter_by_quality_average" />
+    <item
+        android:id="@+id/filter_option3"
+        android:title="@string/filter_by_quality_poor" />
+    <!-- Add more filter options as needed -->
+
+    <item
+        android:id="@+id/filter_option4"
+        android:title="@string/filter_by_quantity_10" />
+
+    <item
+        android:id="@+id/filter_option5"
+        android:title="@string/filter_by_quantity_10_60" />
+
+    <item
+        android:id="@+id/filter_option6"
+        android:title="@string/filter_by_quantity_60" />
+
+    <item
+        android:id="@+id/filter_option7"
+        android:title="@string/filter_by_price_500" />
+
+    <item
+        android:id="@+id/filter_option8"
+        android:title="@string/filter_by_price_500_2000" />
+
+    <item
+        android:id="@+id/filter_option9"
+        android:title="@string/filter_by_price_2000_5000" />
+
+    <item
+        android:id="@+id/filter_option10"
+        android:title="@string/filter_by_price_5000_10000" />
+
+    <item
+        android:id="@+id/filter_option11"
+        android:title="@string/filter_by_price_10000" />
+</menu>
