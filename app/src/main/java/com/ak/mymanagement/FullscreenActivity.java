@@ -118,21 +118,16 @@ public class FullscreenActivity extends AppCompatActivity {
         mControlsView = binding.fullscreenContentControls;
         mContentView = binding.fullscreenContent;
 
-        // Get screen height
-        int screenHeight = getResources().getDisplayMetrics().heightPixels;
+        // Get the start and end positions for the animation
+        float startX = 0; // Starting X coordinate (bottom-left corner)
+        float startY = mContentView.getHeight(); // Starting Y coordinate (bottom of the screen)
+        float endX = (float) (mContentView.getWidth() / 2.0); // End X coordinate (center of the screen)
+        float endY = (float) (mContentView.getHeight() / 2.0); // End Y coordinate (center of the screen)
 
-        // Calculate the Y coordinate for the center of the screen
-        float centerY = screenHeight / 2 - mContentView.getHeight() / 2;
-        // Define the animation: fromYDelta, toYDelta
-        Animation translateAnimation = new TranslateAnimation(
-                Animation.ABSOLUTE, 0,
-                Animation.ABSOLUTE, 0,
-                Animation.ABSOLUTE, -mContentView.getTop(), // Start from the top of the screen
-                Animation.ABSOLUTE, centerY); // Move to the center of the screen
+        // Create the zigzag animation
+        Animation zigzagAnimation = createZigzagAnimation(startX, startY, endX, endY);
 
-        translateAnimation.setDuration(2000);
-
-        mContentView.setAnimation(translateAnimation);
+        mContentView.setAnimation(zigzagAnimation);
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -167,22 +162,6 @@ public class FullscreenActivity extends AppCompatActivity {
         mHideHandler.postDelayed(mHidePart2Runnable, UI_ANIMATION_DELAY);
     }
 
-    private void show() {
-        // Show the system bar
-        if (Build.VERSION.SDK_INT >= 30) {
-            mContentView.getWindowInsetsController().show(
-                    WindowInsets.Type.statusBars() | WindowInsets.Type.navigationBars());
-        } else {
-            mContentView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                    | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
-        }
-        mVisible = true;
-
-        // Schedule a runnable to display UI elements after a delay
-        mHideHandler.removeCallbacks(mHidePart2Runnable);
-        mHideHandler.postDelayed(mShowPart2Runnable, UI_ANIMATION_DELAY);
-    }
-
     /**
      * Schedules a call to hide() in delay milliseconds, canceling any
      * previously scheduled calls.
@@ -190,5 +169,13 @@ public class FullscreenActivity extends AppCompatActivity {
     private void delayedHide(int delayMillis) {
         mHideHandler.removeCallbacks(mHideRunnable);
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
+    }
+
+    public static Animation createZigzagAnimation(float startX, float startY, float endX, float endY) {
+        Animation animation = new TranslateAnimation(startX, endX, startY, endY);
+        animation.setDuration(1000); // Set the duration of the animation
+        animation.setRepeatMode(Animation.REVERSE); // Reverse the animation to create zigzag effect
+        animation.setRepeatCount(Animation.INFINITE); // Repeat the animation infinitely
+        return animation;
     }
 }

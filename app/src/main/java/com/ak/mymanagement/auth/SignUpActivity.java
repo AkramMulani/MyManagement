@@ -4,12 +4,14 @@ package com.ak.mymanagement.auth;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowInsets;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -58,6 +60,22 @@ public class SignUpActivity extends AppCompatActivity {
         email = findViewById(R.id.email_id);
         password = findViewById(R.id.sign_password);
         confirmPassword = findViewById(R.id.confirm_password);
+
+        // Delayed removal of status and navigation bar
+        if (Build.VERSION.SDK_INT >= 30) {
+            username.getWindowInsetsController().hide(
+                    WindowInsets.Type.statusBars() | WindowInsets.Type.navigationBars());
+        } else {
+            // Note that some of these constants are new as of API 16 (Jelly Bean)
+            // and API 19 (KitKat). It is safe to use them, as they are inlined
+            // at compile-time and do nothing on earlier devices.
+            username.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE
+                    | View.SYSTEM_UI_FLAG_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                    | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                    | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+        }
     }
 
     public void register(View view) {

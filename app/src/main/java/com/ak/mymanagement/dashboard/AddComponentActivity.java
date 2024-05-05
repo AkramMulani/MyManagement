@@ -2,14 +2,20 @@ package com.ak.mymanagement.dashboard;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowInsets;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -20,6 +26,7 @@ import android.widget.Toast;
 import com.ak.mymanagement.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -31,6 +38,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.Objects;
 import java.util.UUID;
 
 public class AddComponentActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -46,10 +54,63 @@ public class AddComponentActivity extends AppCompatActivity implements AdapterVi
     private FirebaseUser user;
     private DatabaseReference refComp;
 
+    private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle actionBarDrawerToggle;
+
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_component);
+
+        // Delayed removal of status and navigation bar
+        if (Build.VERSION.SDK_INT >= 30) {
+            findViewById(R.id.qualitySpinner).getWindowInsetsController().hide(
+                    WindowInsets.Type.statusBars() | WindowInsets.Type.navigationBars());
+        } else {
+            // Note that some of these constants are new as of API 16 (Jelly Bean)
+            // and API 19 (KitKat). It is safe to use them, as they are inlined
+            // at compile-time and do nothing on earlier devices.
+            findViewById(R.id.qualitySpinner).setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE
+                    | View.SYSTEM_UI_FLAG_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                    | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                    | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+        }
+
+        drawerLayout = findViewById(R.id.drawer_layout1);
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Add New Component");
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                int index = menuItem.getItemId();
+
+                if (index == R.id.nav_settings) {
+                    // settings selected
+                }
+                else if (index == R.id.nav_about_us) {
+                    // about us selected
+                }
+                else if (index == R.id.nav_logout) {
+                    // logout selected
+                    auth.signOut();
+                    finish();
+                }
+
+                // Close the drawer
+                drawerLayout.closeDrawers();
+                return true;
+            }
+        });
 
         qualitySpinner = findViewById(R.id.qualitySpinner);
 
@@ -67,6 +128,14 @@ public class AddComponentActivity extends AppCompatActivity implements AdapterVi
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
         refComp = db.getReference("Components");
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
